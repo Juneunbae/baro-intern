@@ -15,6 +15,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(GlobalException.class)
 	public ResponseEntity<ErrorResponseDto> handleGlobalException(GlobalException ex) {
 		ErrorCode errorCode = ex.getErrorCode();
+		log.error(errorCode.getMessage());
 
 		ErrorResponseDto errorResponseDto = new ErrorResponseDto(errorCode.getCode(), errorCode.getMessage());
 		return ResponseEntity.status(errorCode.getHttpStatus()).body(errorResponseDto);
