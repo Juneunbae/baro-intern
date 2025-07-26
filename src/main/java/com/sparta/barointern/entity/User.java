@@ -1,12 +1,11 @@
 package com.sparta.barointern.entity;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
+	@Setter
 	private Long id;
 
 	private String username;
