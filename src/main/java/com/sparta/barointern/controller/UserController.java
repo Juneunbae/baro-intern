@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sparta.barointern.dto.request.LoginRequestDto;
 import com.sparta.barointern.dto.request.SignupRequestDto;
 import com.sparta.barointern.dto.response.SignupResponseDto;
+import com.sparta.barointern.dto.response.TokenDto;
 import com.sparta.barointern.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,6 +28,15 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<SignupResponseDto> signup(@RequestBody SignupRequestDto request) {
 		SignupResponseDto responseDto = userService.signup(request);
+		return ResponseEntity.ok(responseDto);
+	}
+
+	@Operation(summary = "로그인", description = "로그인을 위한 API")
+	@ApiResponse(responseCode = "200", description = "로그인 성공")
+	@ApiResponse(responseCode = "400", description = "로그인 실패")
+	@PostMapping("/login")
+	public ResponseEntity<TokenDto> login(@RequestBody LoginRequestDto request) {
+		TokenDto responseDto = userService.login(request);
 		return ResponseEntity.ok(responseDto);
 	}
 }

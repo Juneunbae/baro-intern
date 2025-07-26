@@ -2,6 +2,7 @@ package com.sparta.barointern.service;
 
 import org.springframework.stereotype.Component;
 
+import com.sparta.barointern.dto.request.LoginRequestDto;
 import com.sparta.barointern.dto.request.SignupRequestDto;
 import com.sparta.barointern.exception.ErrorCode;
 import com.sparta.barointern.exception.GlobalException;
@@ -33,6 +34,13 @@ public class UserValidation {
 
 		if (userRepository.findByUsername(request.username()).isPresent()) {
 			throw new GlobalException(ErrorCode.ALREADY_EXISTS);
+		}
+	}
+
+	public void loginValid(LoginRequestDto request) {
+		if (request.username() == null || request.username().trim().isEmpty() ||
+			request.password() == null || request.password().trim().isEmpty()) {
+			throw new GlobalException(ErrorCode.INVALID_INPUT_VALUE);
 		}
 	}
 }
