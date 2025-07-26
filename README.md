@@ -29,14 +29,14 @@
 ## ✅ API 명세
 |이름|주소|
 |--|--|
-|Swagger UI|http://localhost:8080/swagger-ui.html|
+|Swagger UI|http://3.38.181.117:8080/swagger-ui/index.html|
 
 본 서비스는 사용자 인증 및 권한 관리를 위한 RESTful API를 제공합니다.
 
 ### 1. 회원가입 (Sign Up)
 - HTTP Method: POST
 
-- URL: http://0.0.0.0:8080/signup
+- URL: http://3.38.181.117:8080/api/v1/users/signup
 
 - API 설명: 사용자가 서비스에 가입할 때 필요한 정보를 입력받아 계정을 생성합니다.
 
@@ -75,7 +75,7 @@ Response Body 예시
 
 - HTTP Method: POST
 
-- URL: http://0.0.0.0:8080/login
+- URL: http://3.38.181.117:8080/api/v1/users/login
 
 - API 설명: 사용자 이름과 비밀번호를 통해 인증을 시도하고, 성공 시 JWT 인증 토큰을 발급합니다. 이 토큰은 보호된 API에 접근할 때 사용됩니다.
 
@@ -110,7 +110,7 @@ Response Body 예시
 
 - HTTP Method: POST
 
-- URL: http://0.0.0.0:8080/admin/users/{userId}/roles
+- URL: http://3.38.181.117:8080/admin/users/{userId}/roles
 
 - API 설명: 경로 변수 userId에 해당하는 사용자에게 ADMIN 권한을 부여합니다. 관리자만 이 API를 호출할 수 있습니다.
 
