@@ -11,13 +11,22 @@ import io.swagger.v3.core.jackson.ModelResolver;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SwaggerConfig {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
-			.components(new Components())
+			.addSecurityItem(
+				new SecurityRequirement().addList("JWT Authentication"))
+			.components(new Components()
+				.addSecuritySchemes("JWT Authentication",
+					new SecurityScheme()
+						.type(SecurityScheme.Type.HTTP)
+						.scheme("bearer")
+						.bearerFormat("JWT")))
 			.info(apiInfo());
 	}
 

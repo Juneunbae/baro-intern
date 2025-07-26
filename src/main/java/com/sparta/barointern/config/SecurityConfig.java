@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.sparta.barointern.config.Security.JwtAuthenticationFilter;
 import com.sparta.barointern.entity.Role;
+import com.sparta.barointern.exception.JwtAccessDeniedHandler;
 import com.sparta.barointern.service.CustomUserDetailsService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 	private final CustomUserDetailsService customUserDetailsService;
 
@@ -56,8 +58,9 @@ public class SecurityConfig {
 
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(SWAGGER_WHITELIST).permitAll()
-				.requestMatchers("/api/v1/users/login").permitAll()
-				.requestMatchers("/api/v1/users/signup").permitAll()
+				.requestMatchers("/api/v1/users/**").permitAll()
+				.requestMatchers("/api/v1/admin").permitAll()
+				.requestMatchers("api/v1/admin/users/**").hasRole(Role.ADMIN.name())
 				.requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
 				.anyRequest().authenticated()
 			)
@@ -65,6 +68,9 @@ public class SecurityConfig {
 			.httpBasic(AbstractHttpConfigurer::disable)
 			.csrf(AbstractHttpConfigurer::disable)
 			.formLogin(AbstractHttpConfigurer::disable)
+			.exceptionHandling(
+				exception -> exception.accessDeniedHandler(jwtAccessDeniedHandler)
+			)
 
 			// 토큰 사용으로 세션 사용 X
 			.sessionManagement(
@@ -73,7 +79,6 @@ public class SecurityConfig {
 			);
 
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
 	}
 }

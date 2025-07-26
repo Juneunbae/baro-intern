@@ -14,8 +14,10 @@ import com.sparta.barointern.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "사용자")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
