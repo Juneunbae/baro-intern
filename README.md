@@ -116,7 +116,7 @@ Response Body 예시
 
 - Path Variable: {userId} - 권한을 부여할 사용자의 고유 ID
 
-- Path Variable 예시 : http://0.0.0.0:8080/admin/users/15/roles
+- Path Variable 예시 : http://3.38.181.117:8080/admin/users/15/roles
 
 Response Body 예시
 
@@ -156,12 +156,17 @@ Response Body 예시
 Java 21
 
 2. 빌드
-프로젝트 루트 디렉토리에서 아래 명령어를 실행하여 프로젝트를 빌드합니다. ./gradlew build
+프로젝트 루트 디렉토리에서 아래 명령어를 실행하여 프로젝트를 빌드합니다.
 
-3. 실행
-빌드가 완료되면 build/libs 경로에 실행 가능한 .jar 파일이 생성됩니다. 아래 명령어로 애플리케이션을 실행합니다.
+`./gradlew build`
+
+4. 실행
+빌드가 완료되면 build/libs 경로에 실행 가능한 .jar 파일이 생성됩니다.
+
+아래 명령어로 애플리케이션을 실행합니다.
 
 파일 이름의 버전은 프로젝트 설정에 따라 다를 수 있습니다.
-java -jar build/libs/baro-intern-0.0.1-SNAPSHOT.jar
+
+`java -jar build/libs/baro-intern-0.0.1-SNAPSHOT.jar`
 
 애플리케이션은 기본적으로 8080 포트에서 실행됩니다.
